@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+
+
+<script type="text/javascript" src="{%static '/js/cart.js'%}"></script>
+
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-lg-12">
+
+			<div class="box-element" style="border-radius: 6px;">
+            	<a onclick="history.back()" class="btn btn-outline-dark m-2" style="border-radius: 4px;" >Back</a>
+			</div>
+
+			<br>
+			<div class="box-element" style="border-radius: 6px;">
+				<div class="cart-row mt-1" style="font-weight: 600; font-size: 18px; background:#8e99ab; border:solid #8e99ab 1px; border-radius: 6px;">
+					<div style="flex:1;"></div>
+					<div style="flex:1; margin-top: 10px"><strong>Author</strong></div>
+					<div style="flex:1; margin-top: 10px"><strong>Title</strong></div>
+					<div style="flex:1; margin-top: 10px"><strong>Quantity</strong></div>
+
+				</div>
+				{% for item in items %}
+				<div class="cart-row" style="font-size: 18px; font-weight: 500;">
+					<div style="flex:1; position: relative; left: 40px; background: #8e99ab; padding: 10px; border:solid #8e99ab 1px; max-width: 150px; border-radius: 7px; top: 2.5px">
+						<a href="{% url 'book' item.product.id %}"><img class="row-image" style="position: relative;left: 13.5px" src="{{item.product.image.url}}"></a></div>
+					<div style="flex:1; position: relative; top: 60px; left: 170px;"><p>{{item.product.author}}</p></div>
+					<div style="flex:1; position: relative; top: 60px; left: 95px;"><p>{{item.product.title}}</p></div>
+					<div style="flex:1; position: relative; top: 45px; left: 65px;">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity" style=" position: relative; top: 6px">
+							<img data-book="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+
+							<img data-book="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+

@@ -1,0 +1,124 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+<div class="container" >
+    <div class="row justify-content-center">
+        <div class="col">
+
+            <a onclick="history.back()" class="btn btn-outline-dark m-2" style="position:relative; top: 30px; left: 60px">Back</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'cart' %}" class="btn btn-outline-dark m-2" style="position:relative; top: 30px; left: 60px">My books</a>
+            {% else %}
+                <a href="{% url 'cart' %}" class="btn btn-outline-dark m-2" style="position:relative; top: 30px; left: 60px" data-bs-toggle="modal" data-bs-target="#exampleModal">My books</a>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                  </div>
+                  <div class="modal-body">
+                    You should log in, in order to use this function
+                  </div>
+                  <div class="modal-footer">
+                      <a href="{% url 'log_in' %}" class="btn btn-primary my-2" style="color:#212529;font-size:1.25em; min-height: 30px">Log-in <img src="https://cdn-icons-png.flaticon.com/512/8369/8369158.png" width="36" height="36" alt="Log in free icon" title="Log in free icon"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+
+            <div style="height: 90vh;">
+
+                <div class="col-md-9 mt-5 ml-4">
+                    <div class="box-element" style="position: relative; left: 150px; box-shadow:hsl(20, 0%, 60%) 0 0 26px;border-radius: 4px; padding: 10px;">
+                      <div class="col p-4 d-flex flex-column position-static">
+                          <h3 class="fw-bold mb-0 fs-4 text-body-emphasis" style="position: relative; left: 495px;bottom: 10px;">Description</h3>
+                        <p class="card-text mb-auto" style="position: relative; max-width: 650px; left: 250px; top: 10px; ">{{ book.description }}ewrefewsrgerg erfgergergrf erg wefwh ffbb fef e f rfibreuf eriub freuuerf iuebregerg  gerg er g erger  reg er rthg rt rt grt ergergref erfe erfere ergere rgerg ergerfewff we</p>
+                      </div>
+                      <div class="col-3 d-none d-lg-block" style="position: relative; background: #8e99ab; bottom: 60px; border-radius: 4px; width: 220px; left: 18px;">
+                          <img style="position: relative; padding: 12px; width: 200px; height: 270px; left: 11px;"
+                               src="{{ book.image.url }}"
+                               alt="Responsive image"
+                               preserveAspectRatio="xMidYMid slice"
+                               focusable="false"
+                              >                      </div>
+                    </div>
+                </div>
+
+                <div class="container px-4 py-6" id="icon-grid" style="position: relative; left: 22px;">
+
+                    <div class="row row-cols-11 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 py-5">
+
+                          <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-5" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Author</h3>
+                              <p>{{ book.author }}</p>
+                            </div>
+                          </div>
+
+                          <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Language</h3>
+                              <p>{{ book.language }}</p>
+                            </div>
+                          </div>
+
+                           <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Genre</h3>
+                              <a href="{% url 'library' %}?category={{ book.category }}" style="text-decoration: none; color: black">{{ book.category }}</a>
+                            </div>
+                          </div>
+
+                          <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Publisher</h3>
+                              <p>{{ book.publisher }}</p>
+                            </div>
+                          </div>
+
+                          <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-5" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Title</h3>
+                              <p>{{ book.title }}</p>
+                            </div>
+                          </div>
+
+                        <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#geo-fill"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Number of pages</h3>
+                              <p>{{ book.pages }}</p>
+                            </div>
+                        </div>
+
+                       <div class="col d-flex align-items-start">
+                            <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                            <div>
+                              <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Publishing Date</h3>
+                              <p>{{ book.publish_date }}</p>
+                            </div>
+                       </div>
+
+                       <div class="col d-flex align-items-start">
+                           <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#toggles2"></use></svg>
+                           <div class="d-grid gap-2 col-5" >
+                               <a target="_blank" href="https://www.amazon.com/s?k={{book.title}} by {{book.author}}"  class="btn btn-primary" style="color:#212529; font-size: 19px; font-weight: 600;">Buy</a>
+                           </div>
+                       </div>
+
+                    </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
